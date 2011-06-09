@@ -15,6 +15,10 @@ class Menu:
         self.__b4 = Button([255, 0, 0], [200, 200, 100, 100])
         self.__buttons = [self.__b1, self.__b2, self.__b3, self.__b4]
         self.__menu_selection = 0
+        self.__stage = 0
+        
+    def get_stage(self):
+        return self.__stage
 
     """
     This will take care of everything involved with user interaction and the
@@ -33,6 +37,8 @@ class Menu:
                     self.__menu_selection -= 1
                 else:
                     self.__menu_selection = len(self.__buttons) - 1
+            elif event.key == pygame.K_ESCAPE:
+                self.__stage = -1
             
         self.__screen.fill([0, 0, 0])
         
