@@ -1,3 +1,5 @@
+#Author: nickdirienzo
+#Began on: 06.08.2011
 import pygame
 
 class Menu:
@@ -19,7 +21,7 @@ class Menu:
     menu. Returns a Surface object to be blit(ed) to the frame.
     """
     def draw(self):
-        #Why won't this work... >_>
+        #Why won't this work...or is just really delayed
         for event in pygame.event.get():
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_DOWN:

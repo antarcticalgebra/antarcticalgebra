@@ -1,3 +1,5 @@
+#Author: nickdirienzo
+#Began on: 06.08.2011
 import pygame
 from menu import Menu
 
