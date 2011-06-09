@@ -14,21 +14,26 @@ class Menu:
         self.__b3 = Button([255, 0, 0], [200, 50, 100, 100])
         self.__b4 = Button([255, 0, 0], [200, 200, 100, 100])
         self.__buttons = [self.__b1, self.__b2, self.__b3, self.__b4]
-        self.__menuSelection = 0
+        self.__menu_selection = 0
 
     """
     This will take care of everything involved with user interaction and the
     menu. Returns a Surface object to be blit(ed) to the frame.
     """
-    def draw(self):
-        #Why won't this work...or is just really delayed
-        for event in pygame.event.get():
-            if event.type == pygame.KEYUP:
-                if event.key == pygame.K_DOWN:
-                    print "Increase"
-                elif event.key == pygame.K_UP:
-                    print "Decrease"
-                        
+    def draw(self, event):
+        #Main menu selection
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_DOWN:
+                if self.__menu_selection < len(self.__buttons) - 1:
+                    self.__menu_selection += 1
+                else:
+                    self.__menu_selection = 0
+            elif event.key == pygame.K_UP:
+                if self.__menu_selection > 0:
+                    self.__menu_selection -= 1
+                else:
+                    self.__menu_selection = len(self.__buttons) - 1
+            
         self.__screen.fill([0, 0, 0])
         
         #Draws the buttons
@@ -39,7 +44,7 @@ class Menu:
         
         #Draws the 'selection outline'
         pygame.draw.rect(self.__screen, [0, 0, 255], 
-                         self.__buttons[self.__menuSelection].getArea(), 5)
+                         self.__buttons[self.__menu_selection].getArea(), 5)
         return self.__screen
 
 class Button:
