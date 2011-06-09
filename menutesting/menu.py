@@ -13,8 +13,14 @@ class Menu:
         self.__b2 = Button([255, 0, 0], [50, 200, 100, 100])
         self.__b3 = Button([255, 0, 0], [200, 50, 100, 100])
         self.__b4 = Button([255, 0, 0], [200, 200, 100, 100])
-        self.__buttons = [self.__b1, self.__b2, self.__b3, self.__b4]
-        self.__menu_selection = 0
+        self.__menu_items = [
+            [self.__b1, About(self.__screen)],
+            [self.__b2, Scores(self.__screen)],
+            [self.__b3, None],
+            [self.__b4, None]
+        ]
+        self.__main_menu_selection = 0
+        self.__menu_stage = -1
         self.__stage = 0
         
     def get_stage(self):
@@ -25,33 +31,90 @@ class Menu:
     menu. Returns a Surface object to be blit(ed) to the frame.
     """
     def draw(self, event):
-        #Main menu selection
-        if event.type == pygame.KEYUP:
-            if event.key == pygame.K_DOWN:
-                if self.__menu_selection < len(self.__buttons) - 1:
-                    self.__menu_selection += 1
-                else:
-                    self.__menu_selection = 0
-            elif event.key == pygame.K_UP:
-                if self.__menu_selection > 0:
-                    self.__menu_selection -= 1
-                else:
-                    self.__menu_selection = len(self.__buttons) - 1
-            elif event.key == pygame.K_ESCAPE:
-                self.__stage = -1
+              
+        if self.__menu_stage == -1:
+            #Main menu selection
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_DOWN:
+                    if self.__main_menu_selection < len(self.__menu_items) - 1:
+                        self.__main_menu_selection += 1
+                    else:
+                        self.__main_menu_selection = 0
+                elif event.key == pygame.K_UP:
+                    if self.__main_menu_selection > 0:
+                        self.__main_menu_selection -= 1
+                    else:
+                        self.__main_menu_selection = len(self.__menu_items) - 1
+                elif event.key == pygame.K_ESCAPE:
+                    self.__stage = -1
+                elif event.key == pygame.K_RETURN:
+                    self.__menu_stage = self.__main_menu_selection
+                
+            self.__screen.fill([0, 0, 0])
             
-        self.__screen.fill([0, 0, 0])
-        
-        #Draws the buttons
-        for i in xrange(len(self.__buttons)):
-            pygame.draw.rect(self.__screen, 
-                             self.__buttons[i].getColor(),
-                             self.__buttons[i].getArea())
-        
-        #Draws the 'selection outline'
-        pygame.draw.rect(self.__screen, [0, 0, 255], 
-                         self.__buttons[self.__menu_selection].getArea(), 5)
+            #Draws the buttons
+            for i in xrange(len(self.__menu_items)):
+                pygame.draw.rect(self.__screen, 
+                                 self.__menu_items[i][0].getColor(),
+                                 self.__menu_items[i][0].getArea())
+            
+            #Draws the 'selection outline'
+            pygame.draw.rect(self.__screen, [0, 0, 255], 
+                             self.__menu_items[self.__main_menu_selection][0].getArea(), 5)
+         
+        else:
+            self.__screen = self.__menu_items[self.__menu_stage][1].draw(event)
+            self.__menu_stage = self.__menu_items[self.__menu_stage][1].get_stage()
+            
         return self.__screen
+        
+class About:
+    
+    def __init__(self, screen):
+        self.__screen = screen
+        self.__font = pygame.font.Font(None, 36)
+        self.__stage = 0
+        
+    def draw(self, event):
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_LEFT:
+                self.__stage -= 1
+            elif event.key == pygame.K_RIGHT:
+                self.__stage += 1
+                
+        self.__screen.fill([255, 0, 0])
+        return self.__screen
+        
+    def get_stage(self):
+        if self.__stage < 0:
+            temp = -1
+            self.__stage = 0
+            return temp
+        return self.__stage
+        
+class Scores:
+    
+    def __init__(self, screen):
+        self.__screen = screen
+        self.__font = pygame.font.Font(None, 36)
+        self.__stage = 1
+        
+    def draw(self, event):
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_LEFT:
+                self.__stage -= 1
+            elif event.key == pygame.K_RIGHT:
+                self.__stage += 1
+                
+        self.__screen.fill([0, 255, 0])
+        return self.__screen
+        
+    def get_stage(self):
+        if self.__stage < 1:
+            temp = -1
+            self.__stage = 0
+            return temp
+        return self.__stage
 
 class Button:
     """
