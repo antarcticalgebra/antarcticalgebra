@@ -39,13 +39,20 @@ class play_level:
                     intercept= self.objectvalues[1] % self.objectvalues[0]
                     self.equation= 'O=' + str(slope) + '[]+' + str(intercept)
             elif complexity == 3:
-                order=randon.randint(0,3)
+                order=randon.randint(0,2)
                 if order==0:
                     slope = self.objectvalues[0] / (self.objectvalues[1] + self.objectvalues[2])
                     slope = self.objectvalues[0] % (self.objectvalues[1] + self.objectvalues[2])
+                    self.equation= '[]=' + str(slope) + '(O+/_\)+' + str(intercept)
+                elif order == 1:
+                    slope = self.objectvalues[1] / (self.objectvalues[0] + self.objectvalues[2])
+                    slope = self.objectvalues[1] % (self.objectvalues[0cd] + self.objectvalues[2])
                     self.equation= 'O=' + str(slope) + '([]+/_\)+' + str(intercept)
-                #elif
-                    
+                elif order == 2:
+                    slope = self.objectvalues[2] / (self.objectvalues[1] + self.objectvalues[0])
+                    slope = self.objectvalues[2] % (self.objectvalues[1] + self.objectvalues[0])
+                    self.equation= '/_\=' + str(slope) + '([]+O)+' + str(intercept)
+        elif equationtype==constants.EquationForm.
 
     def __init__(self, screen):
         self.screen = screen
