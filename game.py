@@ -6,7 +6,7 @@ from play_level import play_level
 
 class game:
     def draw(self, event):
-        print self.level
+        #print self.level
         if self.level > 0:
             self.level = self.play_level(event, self.level)
         elif self.level == -1:

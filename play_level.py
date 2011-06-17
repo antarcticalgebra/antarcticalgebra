@@ -27,7 +27,7 @@ class play_level:
         if complexity > 3:
             complexity = 3
         for i in range(0,complexity):
-            self.objectvalues[i]=random.randint(1,30)
+            self.objectvalues[i]=random.randint(1,15)
         equationtype=random.randint(0,3)
         
         if equationtype==constants.Const.EquationForm.SLOPEINTERCEPT:
