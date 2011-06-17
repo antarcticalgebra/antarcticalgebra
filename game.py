@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#! /usr/bin/env python2
 import pygame
 from constants import Const
 from level_select import level_select

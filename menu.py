@@ -1,5 +1,6 @@
-import pygame
-from constants import Const
+#! /usr/bin/env python2
+import pygame,constants
+
 
 class Menu:
     def __init__(self, screen):
@@ -35,7 +36,7 @@ class Menu:
                 return Const.EXIT
         if self.__state > 0:
             if self.__state == 1:
-                return Const.GAME
+                return constants.Const.GAME
             else:
                 self.__state = self.__menu_actions[self.__state - 1](event)
         else:
@@ -46,7 +47,7 @@ class Menu:
                                  self.__menu_buttons[i].getArea())
             if self.__menu_selection > 0:
                 pygame.draw.rect(self.__screen, [0, 0, 255], self.__menu_buttons[self.__menu_selection - 1].getArea(), 5)
-        return Const.Menu.MAIN
+        return constants.Menu.MAIN        
 
 class About:
     def __init__(self, screen):
@@ -61,8 +62,8 @@ class About:
         self.__screen.fill([255, 0, 0])
         if self.__page < 0:
             self.__page = 0
-            return Const.EXIT
-        return Const.Menu.ABOUT
+            return constants.Const.EXIT
+        return constants.Menu.ABOUT
 
 class Help:
     def __init__(self, screen):
@@ -77,8 +78,8 @@ class Help:
         self.__screen.fill([0, 255, 0])
         if self.__page < 0:
             self.__page = 0
-            return Const.EXIT
-        return Const.Menu.HELP
+            return constants.Const.EXIT
+        return constants.Menu.HELP
 
 class Button:
     """

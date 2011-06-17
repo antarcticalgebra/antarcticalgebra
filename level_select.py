@@ -1,5 +1,5 @@
-#! /usr/bin/env python
-import pygame, pygame.font
+#! /usr/bin/env python2
+import pygame
 from constants import Const
 
 class level_select:

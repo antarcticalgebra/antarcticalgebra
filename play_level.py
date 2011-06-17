@@ -1,5 +1,6 @@
-#! /usr/bin/env python
-import pygame,random,constants
+#! /usr/bin/env python2
+import pygame,constants
+from random import randint
 from fractions import gcd
 pygame.font.init()
 font = pygame.font.Font(None, 120)
@@ -27,14 +28,14 @@ class play_level:
         if complexity > 3:
             complexity = 3
         for i in range(0,complexity):
-            self.objectvalues[i]=random.randint(1,15)
-        equationtype=random.randint(0,3)
+            self.objectvalues[i]=randint(1,15)
+        equationtype=randint(0,3)
         
-        if equationtype==constants.Const.EquationForm.SLOPEINTERCEPT:
+        if equationtype==constants.EquationForm.SLOPEINTERCEPT:
             
             if complexity == 2:
                 
-                if random.randint(0,1):
+                if randint(0,1):
                     slope = self.objectvalues[0] / self.objectvalues[1]
                     intercept = self.objectvalues[0] % self.objectvalues[1]
                     self.equation = '[]=' + str(slope) + 'O+' + str(intercept)
@@ -45,7 +46,7 @@ class play_level:
                     self.equation= 'O=' + str(slope) + '[]+' + str(intercept)
                     print self.equation
             elif complexity == 3:
-                order=random.randint(0,2)
+                order=randint(0,2)
                 if order==0:
                     slope = self.objectvalues[0] / (self.objectvalues[1] \
                      + self.objectvalues[2])
@@ -67,17 +68,17 @@ class play_level:
                      + self.objectvalues[0])
                     self.equation= '/_\=' + str(slope) + '([]+O)+' + str(intercept)
                     print self.equation
-        elif equationtype==constants.Const.EquationForm.STANDARD:
+        elif equationtype==constants.EquationForm.STANDARD:
             if complexity==2:
-                coefficients=[random.randint(1,5),random.randint(1,5)]
+                coefficients=[randint(1,5),randint(1,5)]
                 sumofvalues=(self.objectvalues[0] * coefficients[0]) \
                  + (self.objectvalues[1] * coefficients[1])
                 self.equation= str(coefficients[0]) + 'O+' \
                  + str(coefficients[1]) + '[]=' + str(sumofvalues)
                 print self.equation
             elif complexity==3:
-                coefficients=[random.randint(1,5),random.randint(1,5), \
-                 random.randint(1,5)]
+                coefficients=[randint(1,5),randint(1,5), \
+                 randint(1,5)]
                 sumofvalues=(self.objectvalues[0] * coefficients[0]) \
                  + (self.objectvalues[1] * coefficients[1]) \
                  + (self.objectvalues[2] * coefficients[2])
@@ -87,14 +88,14 @@ class play_level:
                 print self.equation
                 
                 
-        elif equationtype==constants.Const.EquationForm.UNSIMPLIFIEDSI:
+        elif equationtype==constants.EquationForm.UNSIMPLIFIEDSI:
             
             
             if complexity == 2:
-                if random.randint(0,1):
+                if randint(0,1):
                     slope = self.objectvalues[0] / self.objectvalues[1]
                     intercept = self.objectvalues[0] % self.objectvalues[1]
-                    coefficient = random.randint(1,5)
+                    coefficient = randint(1,5)
                     slope *= coefficient
                     intercept *=coefficient
                     self.equation = str(coefficient) + '[]=' + str(slope) \
@@ -103,20 +104,20 @@ class play_level:
                 else:
                     slope = self.objectvalues[1] / self.objectvalues[0]
                     intercept= self.objectvalues[1] % self.objectvalues[0]
-                    coefficient = random.randint(1,5)
+                    coefficient = randint(1,5)
                     slope *= coefficient
                     intercept *=coefficient
                     self.equation = str(coefficient) + '[]=' + str(slope) \
                      + 'O+' + str(intercept)
                     print self.equation
             elif complexity == 3:
-                order=random.randint(0,2)
+                order=randint(0,2)
                 if order==0:
                     slope = self.objectvalues[0] / (self.objectvalues[1] \
                      + self.objectvalues[2])
                     intercept = self.objectvalues[0] % (self.objectvalues[1] \
                      + self.objectvalues[2])
-                    coefficient = random.randint(1,5)
+                    coefficient = randint(1,5)
                     slope *= coefficient
                     intercept *=coefficient
                     self.equation= str(coefficient) + '[]=' + str(slope) \
@@ -127,7 +128,7 @@ class play_level:
                      + self.objectvalues[2])
                     intercept = self.objectvalues[1] % (self.objectvalues[0] \
                      + self.objectvalues[2])
-                    coefficient = random.randint(1,5)
+                    coefficient = randint(1,5)
                     slope *= coefficient
                     intercept *=coefficient
                     self.equation= str(coefficient) + 'O=' + str(slope) \
@@ -138,13 +139,13 @@ class play_level:
                      + self.objectvalues[0])
                     intercept = self.objectvalues[2] % (self.objectvalues[1] \
                      + self.objectvalues[0])
-                    coefficient = random.randint(1,5)
+                    coefficient = randint(1,5)
                     slope *= coefficient
                     intercept *=coefficient
                     self.equation= str(coefficient) + '/_\=' + str(slope) \
                      + '([]+O)+' + str(intercept)
                     print self.equation
-        elif equationtype==constants.Const.EquationForm.NOCONSTANTS:
+        elif equationtype==constants.EquationForm.NOCONSTANTS:
             if complexity == 2:
                 greatestdivisor=gcd(self.objectvalues[0],self.objectvalues[1])
                 self.equation=str(self.objectvalues[1]/greatestdivisor) + '[]=' \
