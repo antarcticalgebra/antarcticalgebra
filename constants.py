@@ -1,14 +1,14 @@
 class Const:
-    
     EXIT = -1
     MENU = 0
     GAME = 1
     
-    class Menu:
-        MAIN = 0
-        ABOUT = 1
-        HELP = 2
-    
+class State:
+    MAIN = -1
+    GAME = 0
+    ABOUT = 1
+    HELP = 2
+
 class EquationForm:
     STANDARD=0 #x+y+z=K
     SLOPEINTERCEPT=1 #y=mx+b
