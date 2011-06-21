@@ -3,8 +3,9 @@ class Const:
     MENU = 0
     GAME = 1
     
-class Menu:
-    MAIN = 0
+class State:
+    MAIN = -1
+    GAME = 0
     ABOUT = 1
     HELP = 2
 

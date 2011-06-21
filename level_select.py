@@ -1,6 +1,6 @@
 #! /usr/bin/env python2
-import pygame
-from constants import Const
+import pygame, pygame.font
+from constants import *
 
 class level_select:
     def draw(self, event):
@@ -38,6 +38,7 @@ class level_select:
                 return (self.selected[1]*5 + self.selected[0] + 1)
             if event.key == pygame.K_BACKSPACE:
                 return Const.EXIT
+        return 0
         pygame.display.flip()
         
     def __init__(self, screen):

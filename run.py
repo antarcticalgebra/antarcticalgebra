@@ -1,7 +1,6 @@
 #! /usr/bin/env python2
 import pygame
 from menu import Menu
-from game import game
 
 def main():
     pygame.init()
@@ -14,11 +13,11 @@ def main():
     clock = pygame.time.Clock()
     
     state = 0
-    states = [Menu(screen).draw, game(screen).draw]
+    states = [Menu(screen).draw]
 
     running = True
     while running:
-        milliseconds = clock.tick(60) # maximum number of frames per second
+        milliseconds = clock.tick(25) # maximum number of frames per second
         
         event = pygame.event.poll()
         if event.type == pygame.QUIT:
