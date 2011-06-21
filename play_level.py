@@ -5,7 +5,7 @@ import time
 from equation import Equation
 
 class play_level:
-    def draw(self, event, level):
+    def draw(self, level, event):
         self.__screen.fill([0, 0, 0])
         pygame.font.init()
         font = pygame.font.Font(None, 100)
